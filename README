@@ -1,1 +1,17 @@
 this is my NyARToolKit Test folder.
+
+
+//-----02/10-----//
+カメラ名をそのまま指定する方法
+import processing.video.*;
+Capture cam;
+void setup(){
+  cam = new Capture(this, width, height, "カメラ名", fps);
+}
+
+カメラが生きているか判断
+void draw(){
+  println(cam.available());
+}
+
+falseが返れば死んでいる
