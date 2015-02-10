@@ -9,15 +9,19 @@ void setup() {
   colorMode(RGB, 100);
   println(MultiMarker.VERSION);
   String[] cameras = Capture.list();
-  cam=new Capture(this,cameras[0]);
+  cam=new Capture(this,width,height,"BUFFALO BSW32KM03 USB PC Camera", 30);
   cam.start();
   nya=new MultiMarker(this,width,height,"camera_para.dat",NyAR4PsgConfig.CONFIG_PSG);
   nya.addARMarker("patt.hiro",80);
   cam.start();
 }
 
+int c = 0;
+
 void draw()
 {
+  println(cam.available());
+  c++;
   if (cam.available() !=true) {
       return;
   }
@@ -29,13 +33,12 @@ void draw()
     return;
   }
   nya.beginTransform(0);
-  noFill();
+  fill(100);
   translate(0,0,20);
-  sphere(40);
-  sphereDetail(3);
-  
+  box(40);
+  rotate((float)c/100);
   fill(0);
   textSize(30);
-  text(second(), -15, 0, 20);
+  text(second(), -15, -10, 21);
   nya.endTransform();
 }
